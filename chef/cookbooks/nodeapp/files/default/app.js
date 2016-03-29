@@ -1,9 +1,17 @@
-var http = require('http');
 var os   = require('os');
 var hostname = os.hostname();
+var server = require("./node-router").getServer();
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello from ' + hostname + '\n');
-}).listen(1337);
-console.log('Server running at http://127.0.0.1:1337/');
+server.get("/", function (request, response) {
+    response.simpleText(200, "Hello from " + hostname + "\n")
+});
+
+server.get("/time", function (request, response) {
+    response.simpleJson(200, {
+        hostname : hostname,
+        date : new Date()
+    })
+});
+
+
+server.listen(1337, "localhost");

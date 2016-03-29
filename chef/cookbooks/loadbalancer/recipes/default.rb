@@ -10,7 +10,7 @@ template '/etc/nginx/sites-available/default' do
   variables({
     :upstream_servers => node[:loadbalancer][:upstream_servers]
   })
-  notifies :restart, resources(:service => "nginx")
+  notifies :restart, resources(:service => 'nginx')
 end
 
   
